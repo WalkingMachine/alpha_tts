@@ -3,13 +3,19 @@ from rclpy.node import Node
 
 from std_msgs.msg import String
 
-class MinimalPublisher(Node):
+import os
+import sys
+
+class TextToSpeech(Node):
     def __init__(self):
-        super().__init__("minimal_publisher")
+        super().__init__("text_to_speech")
+
+
 
         self._pub = self.create_publisher(msg_type=String, topic="topic", qos_profile=10)
 
-        self.timer = self.create_timer(0.5, callback=self.do_something)
+        self.timer = self.create_timer(2, callback=self.do_something)
+
 
     
     def do_something(self):
@@ -19,11 +25,16 @@ class MinimalPublisher(Node):
         self.get_logger().info('Publishing : hi2you')
         print("hi")
 
+        os.system('echo "hello world, my name is alpha" | festival --tts')
+    #def festival_tts(self, text_request):
+
+        
+
 def main(args=None):
 
     rclpy.init(args=args)
 
-    node = MinimalPublisher()
+    node = TextToSpeech()
     
     rclpy.spin(node)
     node.destroy_node()

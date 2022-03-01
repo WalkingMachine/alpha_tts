@@ -1,10 +1,10 @@
 FROM osrf/ros:foxy-desktop
 
-RUN mkdir -p root/dev/src
+RUN mkdir -p /root/dev/src
 
-COPY . root/dev/src
+COPY . /root/dev/src
 
-RUN cd root/dev
+RUN cd /root/dev
 
 RUN colcon build
 

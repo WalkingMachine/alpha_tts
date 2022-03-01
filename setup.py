@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            "tts_command = alpha_tts.tts_publisher:main",
         ],
     },
 )

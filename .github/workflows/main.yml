@@ -1,0 +1,10 @@
+on: [push]
+
+jobs:
+  alpha_tts:
+    runs-on: ubuntu-latest
+    name: A job to build alpha tts
+    steps:
+      - name: Build package
+        id: build
+        uses: alpha_tts/alpha-tts@v1

@@ -7,4 +7,4 @@ jobs:
     steps:
       - name: Build package
         id: build
-        uses: WalkingMachine/alpha-tts@v1
+        uses: WalkingMachine/alpha_tts@v1

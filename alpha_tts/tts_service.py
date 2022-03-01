@@ -1,32 +1,23 @@
 import rclpy
 from rclpy.node import Node
 
-from std_msgs.msg import String
+from alpha_interfaces.srv import StringToSpeech
+
 
 import os
 import sys
 
 class TextToSpeech(Node):
     def __init__(self):
-        super().__init__("text_to_speech")
+        super().__init__('minimal_service')
+        self.srv = self.create_service(StringToSpeech, 'text_to_speech', self.add_two_ints_callback)
 
+    def add_two_ints_callback(self, request, response):
+        os.system('echo "' + request.text  + ' " | festival --tts')
+        self.get_logger().info('Incoming request : ' + request.text)
+        response.result = True
 
-
-        self._pub = self.create_publisher(msg_type=String, topic="topic", qos_profile=10)
-
-        self.timer = self.create_timer(2, callback=self.do_something)
-
-
-    
-    def do_something(self):
-        msg = String()
-        msg.data = "hi2you"
-        self._pub.publish(msg)
-        self.get_logger().info('Publishing : hi2you')
-        print("hi")
-
-        os.system('echo "hello world, my name is alpha" | festival --tts')
-    #def festival_tts(self, text_request):
+        return response
 
         
 

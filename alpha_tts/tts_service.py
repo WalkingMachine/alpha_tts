@@ -10,9 +10,9 @@ import sys
 class TextToSpeech(Node):
     def __init__(self):
         super().__init__('minimal_service')
-        self.srv = self.create_service(StringToSpeech, 'text_to_speech', self.add_two_ints_callback)
+        self.srv = self.create_service(StringToSpeech, 'text_to_speech', self.text_to_speech_callback)
 
-    def add_two_ints_callback(self, request, response):
+    def text_to_speech_callback(self, request, response):
         os.system('echo "' + request.text  + ' " | festival --tts')
         self.get_logger().info('Incoming request : ' + request.text)
         response.result = True

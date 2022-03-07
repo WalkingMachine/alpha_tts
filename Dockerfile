@@ -1,5 +1,8 @@
 FROM osrf/ros:foxy-desktop
 
+# Software Dependencies
+RUN apt-get install festival
+
 RUN mkdir -p ~/dev/src/alpha_tts
 
 COPY . /root/dev/src

@@ -1,7 +1,8 @@
-FROM osrf/ros:foxy-desktop
+FROM alpha_interfaces
 
 # Software Dependencies
-RUN apt-get install festival
+RUN apt-get update -y
+RUN apt-get install festival -y
 
 RUN mkdir -p ~/dev/src/alpha_tts
 
@@ -11,7 +12,7 @@ WORKDIR /root/dev
 
 RUN colcon build
 
-RUN sed -i "$d" /ros_entrypoint.sh
+RUN sed -i "$ d" /ros_entrypoint.sh
 RUN echo 'source "/root/dev/install/setup.bash"' >> /ros_entrypoint.sh
 RUN echo 'exec "$@"' >> /ros_entrypoint.sh
 

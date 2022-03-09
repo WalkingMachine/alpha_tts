@@ -1,19 +1,12 @@
-FROM alpha_interfaces
-
-# Software Dependencies
-RUN apt-get update -y
-RUN apt-get install festival -y
+FROM etswalkingmachine/alpha_interfaces:dev
 
 RUN mkdir -p ~/dev/src/alpha_tts
 
-COPY . /root/dev/src
+COPY . /root/dev/src/alpha_tts
 
-WORKDIR /root/dev
+RUN apt-get update
+RUN bash src/alpha_tts/install_dependencies.bash
 
-RUN colcon build
+RUN rosdep install -i --from-path src --rosdistro foxy -y
 
-RUN sed -i "$ d" /ros_entrypoint.sh
-RUN echo 'source "/root/dev/install/setup.bash"' >> /ros_entrypoint.sh
-RUN echo 'exec "$@"' >> /ros_entrypoint.sh
-
-ENTRYPOINT ["/ros_entrypoint.sh"]
+RUN colcon build --packages-select alpha_tts

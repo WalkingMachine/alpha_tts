@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "tts_command = alpha_tts.tts_service:main",
+            "start_server = alpha_tts.tts_service:main",
+            "say = alpha_tts.tts_client:main",
         ],
     },
 )

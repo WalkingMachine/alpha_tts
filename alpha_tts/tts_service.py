@@ -1,12 +1,13 @@
 import rclpy
 from rclpy.node import Node
-
 from alpha_interfaces.srv import StringToSpeech
 
-
 import os
-import sys
 
+
+"""
+This node have the goal to provide text to speech ability to alpha.
+"""
 class TextToSpeech(Node):
     def __init__(self):
         super().__init__('minimal_service')
